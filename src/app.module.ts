@@ -6,9 +6,20 @@ import { CoreModule } from './core/core.module';
 import { PaisesModule } from './paises/paises.module';
 import { MiddlewareConsumer } from '@nestjs/common';
 import { AuthMiddleware } from './auth/auth.middleware';
+import { ErrorsModule } from './errors/errors.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [SharedModule, CoreModule, PaisesModule],
+  imports: [
+    SharedModule,
+    CoreModule,
+    PaisesModule,
+    ErrorsModule,
+    PrismaModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
