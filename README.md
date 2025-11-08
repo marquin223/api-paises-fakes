@@ -1,6 +1,6 @@
 # 🌍 API de Países Fakes
 
-Uma API divertida e criativa construída com **NestJS**, que gera informações fictícias sobre países inexistentes, suas bandeiras, moedas e curiosidades.  
+Uma API divertida e criativa construída com **NestJS**, para informações fictícias sobre países inexistentes, e suas curiosidades.  
 Também possui **autenticação JWT**, **autorização por roles** (USER e ADMIN), **CRUD de países**, e **documentação interativa com Swagger**.
 
 Projeto desenvolvido como parte da disciplina da UTFPR.
@@ -56,9 +56,13 @@ TypeScript
 📂 Estrutura do Projeto
 
 src/
+
 auth/
+
 pais/
+
 prisma/
+
 main.ts
 
 ## 💻 Como Rodar Localmente
