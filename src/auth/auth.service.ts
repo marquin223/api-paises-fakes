@@ -20,7 +20,6 @@ export class AuthService {
       data: { email, password: hashed, name },
     });
 
-    // remove senha antes de retornar
     const { password: _, ...safe } = user;
     return safe;
   }
@@ -32,7 +31,8 @@ export class AuthService {
     const matches = await bcrypt.compare(password, user.password);
     if (!matches) throw new UnauthorizedException('Invalid credentials.');
 
-    const payload = { sub: user.id, email: user.email };
+    // inclui o role no payload
+    const payload = { sub: user.id, email: user.email, role: user.role };
     const access_token = await this.jwtService.signAsync(payload);
 
     return { access_token };
