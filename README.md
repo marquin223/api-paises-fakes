@@ -25,9 +25,6 @@ Quando você acessa:
 
 GET /pais
 
-css
-Copiar código
-
 E ainda **não houver países cadastrados**, a API **gera países fictícios automaticamente**, sem precisar adicionar manualmente.
 
 Exemplo de resposta:
@@ -40,7 +37,10 @@ Exemplo de resposta:
   "idioma": "Cafeinês",
   "curiosidade": "Todo cidadão recebe um café grátis por dia."
 }
-🛠 Tecnologias Utilizadas
+```
+
+## 🛠 Tecnologias Utilizadas
+
 NestJS
 
 Prisma ORM
@@ -54,40 +54,33 @@ Swagger (Documentação)
 TypeScript
 
 📂 Estrutura do Projeto
-css
-Copiar código
+
 src/
-  auth/
-  pais/
-  prisma/
-  main.ts
-💻 Como Rodar Localmente
+auth/
+pais/
+prisma/
+main.ts
+
+## 💻 Como Rodar Localmente
+
 Clone o repositório:
 
-bash
-Copiar código
 git clone https://github.com/SEU_USUARIO/api-paises-fakes.git
 cd api-paises-fakes
 Instale as dependências:
 
-bash
-Copiar código
 npm install
 Configure o .env:
 
 env
-Copiar código
+
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/meubanco"
 JWT_SECRET="minha_chave_secreta"
 Execute as migrações:
 
-bash
-Copiar código
 npx prisma migrate dev
 Inicie o servidor:
 
-bash
-Copiar código
 npm run start:dev
 Acesse:
 
@@ -105,39 +98,35 @@ Clique em Authorize
 Cole assim:
 
 nginx
-Copiar código
+
 Bearer SEU_TOKEN_AQUI
 🔥 Deploy no Railway
+
 1. Crie um PostgreSQL no Railway
-Acesse: https://railway.app
+   Acesse: https://railway.app
 
 Clique em New → Database → PostgreSQL
 
 Copie DATABASE_URL
 
 2. Deploy da API
-Clique em New → Deploy from GitHub
+   Clique em New → Deploy from GitHub
 
 Selecione este repositório
 
 3. Configure variáveis
-No menu Variables, adicione:
+   No menu Variables, adicione:
 
-Chave	Valor
-DATABASE_URL	Cola a URL do banco
-JWT_SECRET	Uma chave secreta boa
+Chave Valor
+DATABASE_URL Cola a URL do banco
+JWT_SECRET Uma chave secreta boa
 
 4. Rode migrações no Railway
-Clique no botão >_ Shell no serviço e execute:
+   Clique no botão >\_ Shell no serviço e execute:
 
-bash
-Copiar código
-npx prisma migrate deploy
-5. Pronto 🎉
+npx prisma migrate deploy 5. Pronto 🎉
 URL da API:
 https://seuapp.up.railway.app
 
 Swagger:
 https://seuapp.up.railway.app/api
-
-```
