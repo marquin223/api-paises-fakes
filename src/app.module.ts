@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { PaisesModule } from './paises/paises.module';
 import { MiddlewareConsumer } from '@nestjs/common';
-import { AuthMiddleware } from './auth/auth.middleware';
 import { ErrorsModule } from './errors/errors.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthService } from './auth/auth.service';
@@ -14,6 +14,9 @@ import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     SharedModule,
     CoreModule,
     PaisesModule,
@@ -25,8 +28,4 @@ import { AdminModule } from './admin/admin.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('paises');
-  }
-}
+export class AppModule {}

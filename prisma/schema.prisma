@@ -19,13 +19,14 @@ enum Role {
 }
 
 model Pais {
-  id         Int      @id @default(autoincrement())
-  nome       String
-  capital    String
-  populacao  Int
-  continente String
-  criadoEm   DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  nome         String
+  continente   String
+  populacao    Int
+  idioma       String
+  curiosidade  String
 }
+
 
 model User {
   id        Int      @id @default(autoincrement())

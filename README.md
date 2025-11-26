@@ -1,136 +1,152 @@
-# 🌍 API de Países Fakes
+# 🌍 API de Países — NestJS + Prisma + MySQL
 
-Uma API divertida e criativa construída com **NestJS**, para informações fictícias sobre países inexistentes, e suas curiosidades.  
-Também possui **autenticação JWT**, **autorização por roles** (USER e ADMIN), **CRUD de países**, e **documentação interativa com Swagger**.
+## 👤 Autor
 
-Projeto desenvolvido como parte da disciplina da UTFPR.
-
----
-
-## 🚀 Funcionalidades
-
-| Rota                  | Descrição                                             | Autenticação    |
-| --------------------- | ----------------------------------------------------- | --------------- |
-| `POST /auth/register` | Registra usuário (role padrão USER)                   | ✅              |
-| `POST /auth/login`    | Faz login e retorna token JWT                         | ✅              |
-| `GET /auth/me`        | Retorna o usuário autenticado                         | ✅ Bearer Token |
-| `GET /pais`           | Lista países existentes ou gera novos automaticamente | ✅              |
-| `POST /pais`          | Cria país manualmente (somente ADMIN)                 | ✅ + Role ADMIN |
+**Nome:** _[Marcos Costa]_  
+**Curso:** _[TSI]_
 
 ---
 
-## 🧠 Geração Automática de Países
+## 📌 Descrição do Projeto
 
-Quando você acessa:
+Esta é uma API desenvolvida com **NestJS**, **Prisma ORM** e **MySQL**, criada para gerenciar dados de países.  
+Mesmo utilizando dados fictícios, seu objetivo é demonstrar:
 
-GET /pais
+- Arquitetura modular de APIs em NestJS
+- Persistência de dados (CRUD completo)
+- Autenticação e autorização com JWT
+- Documentação automática com Swagger
+- Boas práticas de organização de código e segurança
 
-E ainda **não houver países cadastrados**, a API **gera países fictícios automaticamente**, sem precisar adicionar manualmente.
+O projeto atende aos requisitos da avaliação final, cobrindo:  
+**RA1, RA2, RA4 e RA5.**
 
-Exemplo de resposta:
+## 🛠️ Instruções de Execução Local
 
-```json
-{
-  "nome": "República de Cafélândia",
-  "continente": "América Aromática",
-  "populacao": 12000000,
-  "idioma": "Cafeinês",
-  "curiosidade": "Todo cidadão recebe um café grátis por dia."
-}
+### ✔️ **Pré-requisitos**
+
+- **Node.js:** versão 18+
+- **NPM ou Yarn:** qualquer versão atual
+- **MySQL:** versão 8+
+- **Git** instalado na máquina
+- **Nest CLI** (opcional, mas recomendado):
+
+```bash
+npm i -g @nestjs/cli
 ```
 
-## 🛠 Tecnologias Utilizadas
+Clonar o repositório:
 
-NestJS
+git clone https://github.com/SEU-USUARIO/SEU-REPO.git
+cd SEU-REPO
 
-Prisma ORM
-
-PostgreSQL
-
-JWT (Autenticação)
-
-Swagger (Documentação)
-
-TypeScript
-
-📂 Estrutura do Projeto
-
-src/
-
-auth/
-
-pais/
-
-prisma/
-
-main.ts
-
-## 💻 Como Rodar Localmente
-
-Clone o repositório:
-
-git clone https://github.com/SEU_USUARIO/api-paises-fakes.git
-cd api-paises-fakes
-Instale as dependências:
+Instalar dependências:
 
 npm install
-Configure o .env:
 
-env
+🗄️ Configuração do Banco de Dados
 
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/meubanco"
-JWT_SECRET="minha_chave_secreta"
-Execute as migrações:
+Crie um banco MySQL:
+
+CREATE DATABASE paisesdb;
+
+Configure o Prisma:
 
 npx prisma migrate dev
-Inicie o servidor:
+
+Ou gere o schema diretamente no banco:
+
+npx prisma db push
+
+(Opcional) Popular com países fake:
+
+npm run seed
+
+🔐 Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto:
+
+DATABASE_URL="mysql://root:senha@localhost:3306/paisesdb"
+JWT_SECRET="uma_chave_secreta_segura"
+JWT_EXPIRES_IN=3600
+
+▶️ Execução da API
+
+Rodar em modo desenvolvimento:
 
 npm run start:dev
-Acesse:
 
-API: http://localhost:3000
+Rodar em modo produção:
 
-Swagger: http://localhost:3000/api
+npm run build
+npm run start:prod
 
-🔐 Autenticação no Swagger
-Faça login em /auth/login
+A API rodará em:
+👉 http://localhost:3000
 
-Copie o token access_token
+Documentação Swagger:
+👉 http://localhost:3000/api
 
-Clique em Authorize
+🗃️ Diagrama ERD (Entidade-Relacionamento)
+Modelo de entidades usado no projeto (User e Pais):
 
-Cole assim:
+enum Role {
+USER
+ADMIN
+}
 
-nginx
+model Pais {
+id Int @id @default(autoincrement())
+nome String
+continente String
+populacao Int
+idioma String
+curiosidade String
+}
 
-Bearer SEU_TOKEN_AQUI
-🔥 Deploy no Railway
+model User {
+id Int @id @default(autoincrement())
+email String @unique
+password String
+name String?
+role Role @default(USER)
+createdAt DateTime @default(now())
+}
 
-1. Crie um PostgreSQL no Railway
-   Acesse: https://railway.app
+RA1 — Arquitetura da API (NestJS)
 
-Clique em New → Database → PostgreSQL
+Arquitetura modular (modules/controllers/services)
 
-Copie DATABASE_URL
+Padrão MVC aplicado
 
-2. Deploy da API
-   Clique em New → Deploy from GitHub
+Middleware configurado
 
-Selecione este repositório
+Prisma integrado como provider
 
-3. Configure variáveis
-   No menu Variables, adicione:
+RA2 — Persistência e CRUD
 
-Chave Valor
-DATABASE_URL Cola a URL do banco
-JWT_SECRET Uma chave secreta boa
+Banco MySQL configurado
 
-4. Rode migrações no Railway
-   Clique no botão >\_ Shell no serviço e execute:
+Prisma ORM configurado
 
-npx prisma migrate deploy 5. Pronto 🎉
-URL da API:
-https://seuapp.up.railway.app
+CRUD completo de países
 
-Swagger:
-https://seuapp.up.railway.app/api
+CRUD documentado com Swagger
+
+Seed de dados fake
+
+RA4 — Documentação e Deploy
+
+Swagger configurado
+
+Deploy hospedado (adicione o link acima)
+
+RA5 — Autenticação e Autorização
+
+Login com JWT
+
+Proteção de rotas
+
+ROLE ADMIN para rotas de escrita
+
+Validação do token em middleware/guards
