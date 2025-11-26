@@ -44,7 +44,7 @@ Instalar dependências:
 
 npm install
 
-🗄️ Configuração do Banco de Dados
+### 🗄️ Configuração do Banco de Dados
 
 Crie um banco MySQL:
 
@@ -62,7 +62,7 @@ npx prisma db push
 
 npm run seed
 
-🔐 Variáveis de Ambiente
+### 🔐 Variáveis de Ambiente
 
 Crie um arquivo .env na raiz do projeto:
 
@@ -70,7 +70,7 @@ DATABASE_URL="mysql://root:senha@localhost:3306/paisesdb"
 JWT_SECRET="uma_chave_secreta_segura"
 JWT_EXPIRES_IN=3600
 
-▶️ Execução da API
+### ▶️ Execução da API
 
 Rodar em modo desenvolvimento:
 
@@ -87,66 +87,44 @@ A API rodará em:
 Documentação Swagger:
 👉 http://localhost:3000/api
 
-🗃️ Diagrama ERD (Entidade-Relacionamento)
+### 🗃️ Diagrama ERD (Entidade-Relacionamento)
 Modelo de entidades usado no projeto (User e Pais):
 
-enum Role {
-USER
-ADMIN
-}
+<img width="500" height="500" alt="models" src="https://github.com/user-attachments/assets/7ad681a3-236a-4b2d-9a9b-a6f21212a6f6" />
 
-model Pais {
-id Int @id @default(autoincrement())
-nome String
-continente String
-populacao Int
-idioma String
-curiosidade String
-}
 
-model User {
-id Int @id @default(autoincrement())
-email String @unique
-password String
-name String?
-role Role @default(USER)
-createdAt DateTime @default(now())
-}
+## RA1 — Arquitetura da API (NestJS)
 
-RA1 — Arquitetura da API (NestJS)
+- [x] Arquitetura modular (modules/controllers/services)
 
-Arquitetura modular (modules/controllers/services)
+- [x] Padrão MVC aplicado
 
-Padrão MVC aplicado
+- [x] Prisma integrado como provider
 
-Middleware configurado
+## RA2 — Persistência e CRUD
 
-Prisma integrado como provider
+- [x] Banco MySQL configurado
 
-RA2 — Persistência e CRUD
+- [x] Prisma ORM configurado
 
-Banco MySQL configurado
+- [x] CRUD completo de países
 
-Prisma ORM configurado
+- [x] CRUD documentado com Swagger
 
-CRUD completo de países
+- [x] Seed de dados fake
 
-CRUD documentado com Swagger
+### RA4 — Documentação e Deploy
 
-Seed de dados fake
+- [x] Swagger configurado
 
-RA4 — Documentação e Deploy
+- [ ] Deploy hospedado
 
-Swagger configurado
+### RA5 — Autenticação e Autorização
 
-Deploy hospedado (adicione o link acima)
+- [x] Login com JWT
 
-RA5 — Autenticação e Autorização
+- [x] Proteção de rotas
 
-Login com JWT
+- [x] ROLE ADMIN para rotas de escrita
 
-Proteção de rotas
-
-ROLE ADMIN para rotas de escrita
-
-Validação do token em middleware/guards
+- [x] Validação do token em middleware/guards
